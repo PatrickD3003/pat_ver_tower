@@ -57,13 +57,18 @@ class Soldier(pygame.sprite.Sprite):
             self.collide = False
 
 
-    def attack(self, enemy):
-        self.enemy = enemy
+    def attack(self, enemy_group, enemy_barrack):
+        self.enemy = pygame.sprite.spritecollideany(self, enemy_group)
         self.enemy.health -= self.offense
-        print(self.enemy.health)
-        if enemy.health <= 0:
-            print("died")
-            self.died = True
+        if self.enemy.health <= 0:
+            self.enemy.kill()
+            enemy_barrack.remove(self.enemy)
+
+
+            
+
+
+
                 
         
 

@@ -24,9 +24,6 @@ def main():
     all_left = []
     all_right = []
 
-    attack_left = []
-    attack_right = []
-
     left_tower = Tower(NO_ROTATE, WINDOW)
     right_tower = Tower(ROTATE, WINDOW)
 
@@ -69,15 +66,8 @@ def main():
                     entity.move()
                 elif entity.collide == True:
                     entity.stop()
-                    for enemy in all_right:
-                        if enemy.collide == True:
-                            entity.attack(enemy)
-                            if enemy.died == True:
-                                right_group.remove(enemy)
-                                enemy.kill()
-                        continue
-                          
-
+                    entity.attack(right_group, all_right)
+               
             
         for entity in all_right:
             entity.summon()
@@ -87,13 +77,8 @@ def main():
                     entity.move()
                 elif entity.collide == True:
                     entity.stop()
-                    for enemy in all_left:
-                        if enemy.collide == True:
-                            entity.attack(enemy)
-                            if enemy.died == True:
-                                left_group.remove(enemy)
-                                enemy.kill()
-                        continue
+                    entity.attack(left_group, all_left)
+                       
                             
         
         
